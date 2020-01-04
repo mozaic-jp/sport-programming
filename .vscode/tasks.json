@@ -8,8 +8,11 @@
         "type": "shell",
         "command": "g++",
         "args":[
-            "-g", "${fileDirname}/*.cpp", "-o", "out/${fileBasenameNoExtension}.out"
-            ,"--debug"
+           "-std=c++14", "-g", "${fileDirname}/*.cpp", 
+           "-o", 
+           "out/${fileBasenameNoExtension}.out",
+           //"${fileDirname}/a.out",
+           "--debug"
         ],
         "group":{
           "kind": "build",
