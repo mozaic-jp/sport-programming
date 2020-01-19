@@ -16,16 +16,33 @@ int main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    ll N, M;
+    ll N, M;//N頂点M個のクエリ
     cin >> N >> M;
-    ll res;
-    ll t;
-    string zero = "";
-    string a;
-    int l,r,m;
-    l = 0;
-    r = N;
-    m = (N-1) / 2;
+    vector <int> g(N);
+
+    REP(i,M)
+    {
+        int a,b;
+        cin >> a >> b;
+        --a;--b;
+        ++g[a];
+        ++g[b];
+    }
+
+    string res = "YES";
+
+    REP(i,N)
+    {
+        if(g[i] % 2 == 1)
+        {
+            res = "NO";
+            break;
+        }
+    }
+
+    cout << res << endl;
+
+
 
     return 0;    
 }
