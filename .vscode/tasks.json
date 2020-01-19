@@ -8,7 +8,8 @@
         "type": "shell",
         "command": "g++",
         "args":[
-           "-std=c++14", "-g", "${fileDirname}/*.cpp", 
+          //"-std=c++14", "-g", "${fileDirname}/*.cpp", 
+          "-std=c++14", "-g", "${fileDirname}/${fileBasenameNoExtension}.cpp", 
            "-o", 
            "out/${fileBasenameNoExtension}.out",
            //"${fileDirname}/a.out",

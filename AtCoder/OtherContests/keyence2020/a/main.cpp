@@ -13,8 +13,10 @@ using namespace std;
 const int MOD = 1000000007;
 
 int main(){
-    ll N,res;
-    cin >> N;
+    ll H,W,N,res;
+    cin >> H >> W >> N;
+
+    res = (N-1) / max(H,W) + 1;
 
     cout << res << endl;
 

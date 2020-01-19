@@ -15,56 +15,45 @@ const int MOD = 1000000007;
 int main(){
     ll N;
     cin >> N;
-    //末尾がAのもの、先頭がBのものを集める、
-    //どちらにも該当するやつは、べつで保存する
+    vector <pair<int, int> > v(N);
 
-    ll a = 0;
-    ll b = 0;
-    ll ab = 0;
-    ll res = 0;
-    string s;
     REP(i,N)
     {
-        cin >> s;
-        for(int i = 1; i < s.size(); ++i)
+        cin >> v[i].first >> v[i].second;
+    }
+    sort(v.begin(),v.end());
+
+    if(N==1)
+    {
+        cout << 1 << endl;
+        return 0;
+    }
+
+    int cnt = 0;
+    int cur = 0;
+    for(int i = 0; i < N-1; ++i)
+    {
+        //1個
+        if(v[i].first + v[i].second <= v[i+1].first - v[i+1].second)
         {
-            if(s[i-1] == 'A' && s[i] =='B')++res;
+            ++cnt;
+            if(i == N-2)++cnt;
+            continue;
         }
-
-        if(s[0] == 'B' && s[s.size() - 1] == 'A')
+        else
         {
-            ++ab;
+            if(i == N-2)++cnt;
+            //v[i]のほうが短いか
+            if(v[i].first + v[i].second <= v[i+1].first + v[i+1].second)
+            {
+                v[i+1].first = v[i].first;
+                v[i+1].second = v[i].second;
+            }
         }
-        else if(s[0] == 'B')++b;
-        else if(s[s.size()-1] == 'A')++a;
     }
 
-    //XXA 1
-    //BXX 2
-    //BXXA 2
 
-    //XXABXXABXXABXX
-
-    //BXXA は 3個で  A BXXABXXABXXA
-    // (3-1)個
-
-    res += ab;
-
-    if(a > b)
-    {
-        res += b;
-    }
-    else
-    {
-        res += a;
-    }
-
-    if(a == 0 && b == 0 && ab > 0)
-    {
-        --res;
-    }
-
-    cout << res << endl;
+    cout << cnt << endl;
 
     return 0;    
 }
