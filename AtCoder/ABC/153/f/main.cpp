@@ -2,71 +2,53 @@
 #include <fstream>
 #include <vector>
 #include <cstring>
+#include <math.h>
 #include <algorithm> // sort
-#include <unistd.h>
-#include <bits/stdc++.h>
 
-#define pii pair<int,int>
 #define REP(i, n) for (long long i = 0; i < (n); i++) 
-using namespace std;
-
-using Graph = vector<vector<int>>;
-
 typedef long long ll;
 static const ll INF = 1000000000000000000LL;
-static const ll MOD = 1000000007;
+using namespace std;
 
+const int MOD = 1000000007;
 
-int main()
-{
-    cin.tie(0);
-    ios::sync_with_stdio(false);
-    ll N,D,A;
+int main(){
+    int N,D,A;
     cin >> N >> D >> A;
-    vector<pair<ll,ll>> mon(N);
+    vector <pair<int,int> >  xh(N);
+
+    REP(i, N)
+    {
+        cin >> xh[i].first >> xh[i].second;
+        //あらかじめ圧縮しておく
+        xh[i].second = (xh[i].second+A-1)/A;
+    }
+    sort(xh.begin(),xh.end());
+    vector<int>s(N+1);
+    int r = 0;
+    ll ans = 0;
     REP(i,N)
     {
-        cin >> mon[i].first >> mon[i].second;
-    }
-
-    //スライディング最大値を範囲Dで覚えておく
-
-    //座標でソート
-    sort(mon.begin(),mon.end());
-
-    //スライド最小値
-    //範囲Dにおける
-    ll res = 0;
-
-    //端から順にやってく
-
-    for(int i = 0; i < N; ++i)
-    {
-        if(mon[i].second <= 0)continue;
-
-        //ichiを二分探索
-        auto it = upper_bound(mon.begin(), mon.end(), make_pair(mon[i].first + D * 2,INF)) - mon.begin();
-
-        ll tmp = mon[i].second;
-        //for(int j = i; j < it; ++j)
-        //{
-        //    tmp = max(tmp, mon[j].second);
-        //}
-
-        //cout << mon[i].first + D * 2 << endl;
-        //cout << it << endl;
-        for(int j = i; j < it; ++j)
+        xh[i].second -= s[i];
+        //rの位置を移動
+        while(r < N && xh[r].first <= xh[i].first + 2 * D)++r;
+        if(xh[i].second > 0)
         {
-            mon[j].second -= tmp;
-        }
 
-        res += (tmp-1) / A + 1;
-        //cout << tmp << endl;
-        //cout << A << endl;
-        //cout << res << endl;
+            int num =xh[i].second;
+            ans += num;
+            s[i] += num;
+            s[r] -= num;
+        }
+        //rの範囲でなくても引き継いでよいのか?
+        //-> rの範囲でなければ、s[r]がひかれているはず
+        //s[i]を引き継ぐ
+        s[i+1] += s[i];
     }
 
-    cout << res << endl;
+    cout << ans << endl;
 
-    return 0;
+
+
+    return 0;    
 }
