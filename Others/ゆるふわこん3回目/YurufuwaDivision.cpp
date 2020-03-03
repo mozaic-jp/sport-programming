@@ -4,31 +4,25 @@
 #include <cstring>
 #include <algorithm> // sort
 #include <unistd.h>
-#include <bits/stdc++.h>
+#include <map>
 
 #define pii pair<int,int>
 #define REP(i, n) for (long long i = 0; i < (n); i++) 
 using namespace std;
 
-using Graph = vector<vector<int>>;
 
 typedef long long ll;
 static const ll INF = 1000000000000000000LL;
 static const ll MOD = 1000000007;
 
-
 int main()
 {
-    int N, K;
-    cin >> N >> K;
-    //2つ選んでペアにする
+    int x, a;
+    cin >> x >> a;
+    int res = 2;
+    if(x <= a)res = 1;
 
-    //大きいのと
-    //負の値同士だと強くなる
-    
-
-
-
+    cout << res << endl;
 
     return 0;
 }

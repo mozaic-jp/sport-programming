@@ -19,15 +19,24 @@ static const ll MOD = 1000000007;
 
 int main()
 {
-    int N, K;
-    cin >> N >> K;
-    //2つ選んでペアにする
+    int N;
+    cin >> N;
+    vector <int> x(N);
+    REP(i, N)cin >> x[i];
 
-    //大きいのと
-    //負の値同士だと強くなる
-    
+    ll res = INF;
 
+    for(int i = 1; i <= 100; ++i)
+    {
+        ll tmp = 0;
+        for(int j = 0; j < N; ++j)
+        {
+            tmp += pow(x[j] - i, 2.0);
+        }
 
+        res = min(res, tmp);
+    }
+    cout << res << endl;
 
 
     return 0;

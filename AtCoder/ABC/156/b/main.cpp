@@ -19,16 +19,18 @@ static const ll MOD = 1000000007;
 
 int main()
 {
-    int N, K;
+    ll N, K;
+    //桁数を回答する
+
     cin >> N >> K;
-    //2つ選んでペアにする
 
-    //大きいのと
-    //負の値同士だと強くなる
-    
+    int res = 1;
+    for(ll i = K; i <= N; i *= K)
+    {
+        ++res;
+    }
 
-
-
+    cout << res << endl;
 
     return 0;
 }
