@@ -33,7 +33,11 @@ int main()
     {
         st[s[i] - 'a'].insert(i);
     }
-
+    //終端を設定しておく
+    REP(d,26)
+    {
+        st[d].insert(N);
+    }
     int Q;
     cin >> Q;
 
@@ -51,6 +55,7 @@ int main()
             {
                 st[s[l] - 'a'].erase(l);
                 st[c - 'a'].insert(l);
+                s[l] = c;
             }
         }
         else
